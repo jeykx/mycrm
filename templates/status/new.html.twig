@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Status{% endblock %}
+
+{% block body %}
+    <h1 class=" ml-2 mt-3">Ajouter un statut</h1>
+<div class="container mt-3">
+
+    {{ include('status/_form.html.twig') }}
+
+    <a class="mt-6" href="{{ path('status_index') }}">Retour à la liste des statuts</a>
+</div>
+{% endblock %}

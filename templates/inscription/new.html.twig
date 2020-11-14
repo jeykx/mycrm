@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New inscription{% endblock %}
+
+{% block body %}
+    <h1 class=" ml-2 mt-4"> Ajouter une inscription</h1>
+
+    <div class="container">
+
+    {{ include('inscription/_form.html.twig') }}
+
+    <a href="{{ path('inscription_index') }}">Retour à la liste des inscriptions</a>
+    </div>
+{% endblock %}

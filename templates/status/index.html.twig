@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Status index{% endblock %}
+
+{% block body %}
+    <h1 class="mt-2">Liste des etats de prospection</h1>
+<div class="container">
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th>code du statut</th>
+                <th>Detail</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for status in statuses %}
+            <tr>
+                <td> 06211F{{ status.id }}</td>
+                <td>{{ status.detail }}</td>
+                <td>
+                {% if is_granted('ROLE_ADMIN') == true %}
+                    <a  class="btn btn-primary" href="{{ path('status_edit', {'id': status.id}) }}">modifier le statut</a>
+                </td>
+            </tr>
+        {% else %}
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') == true %}
+    <a class="btn btn-primary" href="{{ path('status_new') }}">Ajouter un statut</a>
+    {% else %}
+    {% endif %}
+</div>
+{% endblock %}

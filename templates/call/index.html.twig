@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Call index{% endblock %}
+
+{% block body %}
+    <h1 class="ml-2 mt-3">Gestion des appels</h1>
+
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th>Nom du commercial</th>
+                <th>Date de l'appel</th>
+                <th>Heure de l'appel</th>
+                <th>Nom/Prénom du prospect</th>
+                <th>Etat</th>
+                <th>Commentaire</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for call in calls %}
+            <tr>
+                <td>{{ call.user.username }}</td>
+                <td>{{ call.date ? call.date|date('Y-m-d') : '' }}</td>
+                <td>{{ call.hour ? call.hour|date('H:i') : '' }}</td>
+                <td>{{ call.client.customername }}</td>
+                <td>{{ call.status.detail }}</td>
+                <td>{{ call.comment }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('call_edit', {'id': call.id}) }}">modifier</a>
+                    <a class="btn btn-success" href="{{ path('call_new', {'id': call.id}) }}">archiver</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('call_new') }}">Ajouter un appel</a>
+{% endblock %}

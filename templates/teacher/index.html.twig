@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}teacher index{% endblock %}
+
+{% block body %}
+    <h1 class=" ml-2 mt-4">Liste des formateur(trice)s</h1>
+    <div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Formateur</th>
+                <th>Spécialité</th>
+                <th>Telephone</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher.user.username }}</td>
+                <td>{{ teacher.speciality.nameservice }}</td>
+                <td>{{ teacher.telephone }}</td>
+                <td>
+
+                 {% if is_granted('ROLE_ADMIN') == true %}
+                    <a class="btn btn-primary" href="{{ path('teacher_edit', {'id': teacher.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+ {% if is_granted('ROLE_ADMIN') == true %}
+    <a  class="btn btn-primary"href="{{ path('teacher_new') }}">Ajouter un formateur</a
+  {% else %}
+{% endif %}
+    </div>
+{% endblock %}

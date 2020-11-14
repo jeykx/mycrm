@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}inscription index{% endblock %}
+
+{% block body %}
+    <h1 class=" ml-2 mt-4">Liste des etudiants</h1>
+
+    <div class="container">
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Recruteur</th>
+                <th>Etudiant</th>
+                <th>Formateur(trice) assigné</th>
+                <th>Date prévue</th>
+                <th>Spécialité</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inscription in inscriptions %}
+            <tr>
+                <td>{{ inscription.user.username }}</td>
+                <td>{{ inscription.client.customername }}</td>
+                <td>{{ inscription.teacher.teachername }}</td>
+                <td> Le {{ inscription.date ? inscription.date|date('m-d-Y',"Europe/Paris") : '' }} </td>
+                <td>{{ inscription.teacher.speciality.nameservice }}</td>
+                <td>
+
+                {% if is_granted('ROLE_ADMIN') == true %}
+                    <a class="btn btn-danger" href="{{ path('inscription_delete', {'id': inscription.id}) }}">supprimer</a>
+                    <a  class="btn btn-primary" href="{{ path('inscription_edit', {'id': inscription.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+        {% if is_granted('ROLE_ADMIN') == true %}
+            <a class="btn btn-primary" href="{{ path('inscription_new') }}">Nouvelle inscription</a>
+    {% else %}
+{% endif %}
+    </div>
+{% endblock %}

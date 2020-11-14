@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New teacher{% endblock %}
+
+{% block body %}
+    <h1 class="ml-2 mt-3">Ajouter un formateur(trice)</h1>
+<div class="container mt-5">
+
+    {{ include('teacher/_form.html.twig') }}
+
+    <a href="{{ path('teacher_index') }}">Retour à la liste des formateur(trice)s</a>
+</div>
+{% endblock %}

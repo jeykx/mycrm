@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Call{% endblock %}
+
+{% block body %}
+    <h1 class="ml-2 mt-3">Modifier l'appel 6211{{ call.client.id }}F</h1>
+<div class="container">
+
+    {{ include('call/_form.html.twig', {'button_label': 'Valider les modifications'}) }}
+
+    {{ include('call/_delete_form.html.twig') }}
+
+ <a href="{{ path('call_index') }}">Retour à la liste des appels</a>
+</div>
+{% endblock %}

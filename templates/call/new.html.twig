@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Call{% endblock %}
+
+{% block body %}
+    <h1 class="ml-2 mt-3">Ajouter un appel de prospect</h1>
+    <div class="container mt-5">
+
+    {{ include('call/_form.html.twig') }}
+
+    <a href="{{ path('call_index') }}">Retour à la liste des appels</a>
+</div>
+{% endblock %}

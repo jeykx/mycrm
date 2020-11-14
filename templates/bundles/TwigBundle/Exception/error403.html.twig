@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block body %}
+    <h1 class="mt-4">Oups ! Vous n'avez pas accès à cette page, contacter l'administrateur pour y remédier :-)</h1>
+    
+    <h2 class="mt-3">Erreur : {{status_code}}</h2>
+
+{% endblock %}

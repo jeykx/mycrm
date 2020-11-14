@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Service{% endblock %}
+
+{% block body %}
+    <h1 class=" ml-2 mt-4">Liste des formations</h1>
+
+    <div class="container">
+     {% if is_granted('ROLE_ADMIN') == true %}
+
+    {{ include('service/_form.html.twig') }}
+
+     {% else %}
+{% endif %}
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Intitulé</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.nameservice }}</td>
+                <td>
+                 {% if is_granted('ROLE_ADMIN') == true %}
+                    <a class="btn btn-primary" href="{{ path('service_edit', {'id': service.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+    {% endif %}
+
+    {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

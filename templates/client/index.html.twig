@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client index{% endblock %}
+
+{% block body %}
+    <h1 class="ml-2 mt-3">Liste des demandes de documentation</h1>
+
+    <div class="container">
+
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th>Nom/Prénom</th>
+                <th>Formation selectionnée</th>
+                <th>Numero de mobile</th>
+                <th>Adresse postale</th>
+                <th>Ville</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.customername }}</td>
+                <td>{{ client.service.nameservice }}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.address }}</td>
+                <td>{{ client.city }}</td>
+                <td>
+                    <a class="btn btn-primary"href="{{ path('client_edit', {'id': client.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+{% endblock %}
