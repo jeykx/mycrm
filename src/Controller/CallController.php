@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Call;
 use App\Form\CallType;
+use App\Form\SearchCallType;
 use App\Repository\CallRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,12 +17,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class CallController extends AbstractController
 {
     /**
-     * @Route("/", name="call_index", methods={"GET"})
+     * @Route("/", name="call_index", methods={"GET","POST"})
      */
-    public function index(CallRepository $callRepository): Response
+    public function index(Request $request, CallRepository $callRepository): Response
     {
+        $calls = $callRepository->findAll();
+        $form = $this->createForm(SearchCallType::class);
+        $search = $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $calls = $callRepository->search(
+
+                $search->get('status')->getData()
+            );
+        }
+
         return $this->render('call/index.html.twig', [
-            'calls' => $callRepository->findAll(),
+                'calls' => $calls,
+                'form' => $form->createView()
         ]);
     }
 
@@ -91,5 +105,6 @@ class CallController extends AbstractController
 
         return $this->redirectToRoute('call_index');
     }
+
 
 }

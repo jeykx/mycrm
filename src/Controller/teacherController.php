@@ -23,7 +23,7 @@ class teacherController extends AbstractController
     public function index(teacherRepository $teacherRepository): Response
     {
         return $this->render('teacher/index.html.twig', [
-            'teachers' => $teacherRepository->findTeacher(),
+            'teachers' => $teacherRepository->findAll(),
         ]);
     }
 

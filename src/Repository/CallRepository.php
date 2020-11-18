@@ -37,6 +37,12 @@ class CallRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     *
+     */
+
+
+
     public function findHour() {
         return $this->createQueryBuilder('e')->
             orderBy('e.hour', 'DESC')->
@@ -44,6 +50,21 @@ class CallRepository extends ServiceEntityRepository
             getQuery()->
             getResult();
         }
+
+        /**
+         * @return void
+         */
+        public function search($status = null){
+            $query = $this->createQueryBuilder('a');
+
+            if($status != null){
+                $query->leftJoin('a.status', 'c');
+                $query->andWhere('c.id = :id')
+                    ->setParameter('id', $status);
+            }
+            return $query->getQuery()->getResult();
+        }
+
 
     /*
     public function findOneBySomeField($value): ?Call
