@@ -1,0 +1,11 @@
+body {background-color: #222;}
+th, td, legend, label {color: white;}
+h1, h2 {color: #127ba3;}
+nav a {font-weight: 700; }
+navbar { background-color: #222 !important; }
+
+.dropdown-menu { background-color: #222 !important; }
+.dropdown-item { background-color: #222 !important; color: white !important; }
+.dropdown-item:hover {  color: #127ba3 !important; }
+.nav-link:hover {  color: #127ba3 !important; }
+.del { margin-top: 1% !important; margin-bottom: 2% !important;}

@@ -12,6 +12,7 @@
     <div class="container">
 
     {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.speciality) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.username) }}
         {{ form_row(registrationForm.plainPassword, {

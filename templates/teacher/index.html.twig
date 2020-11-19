@@ -9,22 +9,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Formateur</th>
+                <th>Nom du formateur</th>
+                <th>Adresse email</th>
                 <th>Spécialité</th>
-                <th>Telephone</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-        {% for teacher in teachers %}
+        {% for user in users %}
             <tr>
-                <td>{{ teacher.user.username }}</td>
-                <td>{{ teacher.speciality.nameservice }}</td>
-                <td>{{ teacher.telephone }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.speciality.nameservice |default('à définir') }}</td>
                 <td>
 
-                 {% if is_granted('ROLE_ADMIN') == true %}
-                    <a class="btn btn-primary" href="{{ path('teacher_edit', {'id': teacher.id}) }}">modifier</a>
+                {% if is_granted('ROLE_ADMIN') == true %}
+                    <a class="btn btn-primary" href="{{ path('teacher_edit', {'id': user.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -33,7 +33,7 @@
         </tbody>
     </table>
  {% if is_granted('ROLE_ADMIN') == true %}
-    <a  class="btn btn-primary"href="{{ path('teacher_new') }}">Ajouter un formateur</a
+   
   {% else %}
 {% endif %}
     </div>

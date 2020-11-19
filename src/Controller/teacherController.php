@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\teacher;
-use App\Form\teacherType;
-use App\Repository\teacherRepository;
+use App\Entity\User;
+use App\Form\EditUserType;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,66 +17,27 @@ class teacherController extends AbstractController
 {
     /**
      * @Route("/", name="teacher_index", methods={"GET"})
-     * @param teacherRepository $teacherRepository
+     * @param UserRepository $UserRepository
      * @return Response
      */
-    public function index(teacherRepository $teacherRepository): Response
+    public function index(UserRepository $UserRepository): Response
     {
         return $this->render('teacher/index.html.twig', [
-            'teachers' => $teacherRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="teacher_new", methods={"GET","POST"})
-     * @param Request $request
-     * @return Response
-     */
-    public function new(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        $teacher = new teacher();
-        $form = $this->createForm(teacherType::class, $teacher);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($teacher);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('teacher_index');
-        }
-
-        return $this->render('teacher/new.html.twig', [
-            'teacher' => $teacher,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="teacher_show", methods={"GET"})
-     * @param teacher $teacher
-     * @return Response
-     */
-    public function show(teacher $teacher): Response
-    {
-        return $this->render('teacher/show.html.twig', [
-            'teacher' => $teacher,
+            'users' => $UserRepository->findAll(),
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="teacher_edit", methods={"GET","POST"})
      * @param Request $request
-     * @param teacher $teacher
+     * @param user $user
      * @return Response
      */
-    public function edit(Request $request, teacher $teacher): Response
+    public function edit(Request $request, user $user): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $form = $this->createForm(teacherType::class, $teacher);
+        $form = $this->createForm(EditUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -86,8 +47,8 @@ class teacherController extends AbstractController
         }
 
         return $this->render('teacher/edit.html.twig', [
-            'teacher' => $teacher,
-            'form' => $form->createView(),
+            'teacher' => $user,
+            'userForm' => $form->createView(),
         ]);
     }
 

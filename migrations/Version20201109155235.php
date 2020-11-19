@@ -26,7 +26,6 @@ final class Version20201109155235 extends AbstractMigration
         $this->addSql('CREATE TABLE inscription (id INT AUTO_INCREMENT NOT NULL, commercial_id INT DEFAULT NULL, client_id INT NOT NULL, service_id INT NOT NULL, teacher_id INT NOT NULL, date DATE NOT NULL, INDEX IDX_5E90F6D67854071C (commercial_id), INDEX IDX_5E90F6D619EB6921 (client_id), INDEX IDX_5E90F6D6ED5CA9E6 (service_id), INDEX IDX_5E90F6D641807E1D (teacher_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE service (id INT AUTO_INCREMENT NOT NULL, nameservice VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE status (id INT AUTO_INCREMENT NOT NULL, detail VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE teacher (id INT AUTO_INCREMENT NOT NULL, speciality_id INT DEFAULT NULL, teachername VARCHAR(50) NOT NULL, telephone VARCHAR(50) NOT NULL, UNIQUE INDEX UNIQ_B0F6A6D53B5A08D7 (speciality_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE `call` ADD CONSTRAINT FK_CC8E2F3E6BF700BD FOREIGN KEY (status_id) REFERENCES status (id)');
         $this->addSql('ALTER TABLE `call` ADD CONSTRAINT FK_CC8E2F3E7854071C FOREIGN KEY (commercial_id) REFERENCES commercial (id)');
@@ -35,8 +34,7 @@ final class Version20201109155235 extends AbstractMigration
         $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D67854071C FOREIGN KEY (commercial_id) REFERENCES commercial (id)');
         $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D619EB6921 FOREIGN KEY (client_id) REFERENCES client (id)');
         $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D6ED5CA9E6 FOREIGN KEY (service_id) REFERENCES service (id)');
-        $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D641807E1D FOREIGN KEY (teacher_id) REFERENCES teacher (id)');
-        $this->addSql('ALTER TABLE teacher ADD CONSTRAINT FK_B0F6A6D53B5A08D7 FOREIGN KEY (speciality_id) REFERENCES service (id)');
+        $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D641807E1D FOREIGN KEY (teacher_id) REFERENCES user (id)');
     }
 
     public function down(Schema $schema) : void

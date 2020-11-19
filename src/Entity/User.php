@@ -41,6 +41,12 @@ class User implements UserInterface
      */
     private $username;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Service::class, cascade={"persist", "remove"})
+     */
+    private $speciality;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,14 +66,16 @@ class User implements UserInterface
     }
 
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -130,9 +138,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function setUsername(string $username): self
+    public function getSpeciality(): ?Service
     {
-        $this->username = $username;
+        return $this->speciality;
+    }
+
+    public function setSpeciality(?Service $speciality): self
+    {
+        $this->speciality = $speciality;
 
         return $this;
     }

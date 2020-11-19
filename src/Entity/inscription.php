@@ -40,12 +40,6 @@ class inscription
 
     private $service;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=teacher::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-
-    private $teacher;
 
     public function getId(): ?int
     {
@@ -100,15 +94,5 @@ class inscription
         return $this;
     }
 
-    public function getteacher(): ?teacher
-    {
-        return $this->teacher;
-    }
 
-    public function setteacher(?teacher $teacher): self
-    {
-        $this->teacher = $teacher;
-
-        return $this;
-    }
 }
