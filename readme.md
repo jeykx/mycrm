@@ -14,7 +14,7 @@ The user authenticated with the appropriate authorisation (commercial account or
 <code>
 
 # 1: Cloning the repository
-https://github.com/jeykx/crm-commercial
+https://github.com/jeykx/mycrm.git
 
 # 2: installation of dependencies
 composer install
